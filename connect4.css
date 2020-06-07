@@ -1,25 +1,36 @@
 /* game board table */
 
 #board td {
-	width: 50px;
-	height: 50px;
-	border: solid 1px #666;
+	width: 80px;
+	height: 80px;
+	border: solid 3px white;
+	border-radius: 5px;
+	opacity: 0.75;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
-
+.header {
+	text-align: center;
+	font-size: 3em;
+}
 .piece {
 	/* TODO: make into circles */
-	margin: 5px;
+	margin: auto;
 	width: 80%;
 	height: 80%;
+	border: 2px solid white;
 	border-radius: 50%;
+	animation-name: fall-animation;
+	animation-duration: 725ms;
 }
 .p1 {
-	background-color: red;
+	background-image: url("https://i.ibb.co/r51QJZc/charmander-Card.jpg");
+
+	background-size: contain;
 }
 .p2 {
-	background-color: blue;
+	background-image: url("https://i.ibb.co/h9sWMTG/bulbasaur-Card.jpg");
+	background-size: contain;
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
@@ -27,9 +38,45 @@
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-	border: dashed 1px lightgray;
+	border: dashed 1px orange;
 }
 
 #column-top td:hover {
 	background-color: gold;
 }
+
+#game {
+	display: flex;
+	justify-content: center;
+}
+
+@keyframes fall-animation {
+	from {
+		transform: translateY(-480px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+body {
+	font-family: 'Mukta', sans-serif;
+	background-image: url("https://source.unsplash.com/DjlKxYFJlTc");
+	background-size: 100%;
+	color: white;
+}
+#board {
+	border-radius: 5px;
+	border-left: 10px groove orangered;
+	border-right: 10px groove orangered;
+	border-bottom: 10px groove orangered;
+}
+
+button {
+	background-color: lightgrey;
+	border-radius: 10%;
+	font-family: Mukta;
+	font-size: 1em;
+	display: flex;
+	margin-left: 10%;
+}
+/* Things i want to do tomoorrow , aside from regular homework and coursework . I should take a look at the extra options of the springboard. look at the animation thing again and see if it can look more natural. Aside from that I would still like the different styles for example an outrun themed maybe a pokemon theme and then finally a avatar themed version. The connect four isnt very impportant but being able to create a polished finished product IS IMPORTANT. finish writing the comments in the javascript and review it everyday . Look into actually resetting instead of just refreshing the page.maybe for local stoarage can keep try of the bloods and crips win /loss ratio*/

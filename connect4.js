@@ -10,6 +10,9 @@ let HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
+const playerTurn = document.querySelector('.playerTurn');
+playerTurn.textContent = `Player ${currPlayer}'s Turn`;
+playerTurn.style.color = 'orangered';
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -105,7 +108,12 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
 	// TODO: pop up alert message
-	alert(msg);
+	setTimeout(function() {
+		alert(msg);
+	}, 100);
+	playerTurn.textContent = `Congratulations Player ${currPlayer}`;
+	document.getElementById('column-top').removeEventListener('click', handleClick, false);
+	//removing this event listener took me way too long ! it should be easier because it is not an anyonymous function that I am trying to get rid of , it was missing the false which made it not work .
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -127,7 +135,7 @@ function handleClick(evt) {
 
 	// check for win
 	if (checkForWin()) {
-		return endGame(`Player ${currPlayer} won!`);
+		return endGame(`Player ${currPlayer} wins!`);
 	}
 
 	// check for tie
@@ -140,8 +148,12 @@ function handleClick(evt) {
 	// TODO: switch currPlayer 1 <-> 2
 	if (currPlayer === 1) {
 		currPlayer = 2;
+		playerTurn.textContent = `Player ${currPlayer}'s Turn`;
+		playerTurn.style.color = 'lightgreen';
 	} else {
 		currPlayer = 1;
+		playerTurn.textContent = `Player ${currPlayer}'s Turn`;
+		playerTurn.style.color = 'orangered';
 	}
 }
 
@@ -166,6 +178,7 @@ function checkForWin() {
 			var diagDL = [ [ y, x ], [ y + 1, x - 1 ], [ y + 2, x - 2 ], [ y + 3, x - 3 ] ];
 
 			if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+				//want to add a classlist of victory to see if i can hilight the squares to show where the victory is if it is not automatically apparent
 				return true;
 			}
 		}
@@ -174,3 +187,11 @@ function checkForWin() {
 
 makeBoard();
 makeHtmlBoard();
+
+//trying to make a reset button
+// const init = () => {
+// 	makeBoard();
+// 	makeHtmlBoard();
+// };
+// let resetBtn = document.querySelector('#reset');
+// resetBtn.addEventListener('click', init());
